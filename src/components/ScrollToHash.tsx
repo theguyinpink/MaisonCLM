@@ -2,18 +2,26 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 export default function ScrollToHash() {
-  const { hash } = useLocation()
+  const { hash, pathname } = useLocation()
 
   useEffect(() => {
-    if (hash) {
-      const element = document.querySelector(hash)
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' })
-        }, 50)
+    if (!hash) {
+      if (pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
       }
+      return
     }
-  }, [hash])
+
+    const element = document.querySelector(hash)
+    if (!element) return
+
+    const offset = 110
+    const top = element.getBoundingClientRect().top + window.scrollY - offset
+
+    window.setTimeout(() => {
+      window.scrollTo({ top, behavior: 'smooth' })
+    }, 50)
+  }, [hash, pathname])
 
   return null
 }

@@ -1,88 +1,87 @@
-import { useEffect, useState } from "react";
-import { ExternalLink, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
 
 type NavbarProps = {
-  templatesUrl: string;
-};
+  templatesUrl: string
+}
 
 export default function Navbar({ templatesUrl }: NavbarProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [location.pathname, location.hash])
+
+  const getHashHref = useMemo(
+    () => (id: string) => (location.pathname === '/' ? `#${id}` : `/#${id}`),
+    [location.pathname],
+  )
 
   return (
-    <header
-      className={`fixed top-0 left-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/75 backdrop-blur-xl shadow-sm py-3"
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 md:px-10">
-        <Link to="/">
-          <img src="/logo-noir.png" 
-          className="h-10 w-auto object-contain"/>
-        </Link>
-
-        <nav className="hidden items-center gap-8 md:flex">
-          <Link to="/#about">À propos</Link>
-          <Link to="/#services">Services</Link>
-          <Link to="/#projects">Projets</Link>
-          <Link to="/#contact">Contact</Link>
-
-          <a
-            href={templatesUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-[#f2d7e4]/60 px-4 py-2 text-sm font-medium text-gray-900 transition hover:bg-[#eec8da]"
-          >
-            Templates
-            <ExternalLink size={14} />
+    <>
+      <nav id="navbar" className={`nav ${isScrolled ? 'scrolled' : ''}`}>
+        <div className="container nav-inner">
+          <a className="nav-logo" href={location.pathname === '/' ? '#home' : '/#home'} aria-label="Maison CLM accueil">
+            <img src="/logo-noir.png" alt="Maison CLM" className="nav-logo-image" />
           </a>
-        </nav>
 
-        <button
-          type="button"
-          className="md:hidden"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Ouvrir le menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+          <ul className="nav-links">
+            <li><a href={getHashHref('about')}>À propos</a></li>
+            <li><a href={getHashHref('services')}>Services</a></li>
+            <li><a href={getHashHref('projects')}>Projets</a></li>
+            <li>
+              <a href={templatesUrl} target="_blank" rel="noreferrer">Templates ↗</a>
+            </li>
+            <li>
+              <a href={getHashHref('contact')} className="nav-cta">
+                <span>Démarrer un projet</span>
+                <ArrowUpRight size={14} strokeWidth={2} />
+              </a>
+            </li>
+          </ul>
 
-      {isOpen && (
-        <div className="border-t border-gray-100 bg-white/95 p-6 backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-4">
-            <a href="#about" onClick={() => setIsOpen(false)}>
-              À propos
-            </a>
-            <a href="#services" onClick={() => setIsOpen(false)}>
-              Services
-            </a>
-            <a href="#projects" onClick={() => setIsOpen(false)}>
-              Projets
-            </a>
-            <a href="#contact" onClick={() => setIsOpen(false)}>
-              Contact
-            </a>
-            <a
-              href={templatesUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-[#d86aa2]"
-            >
-              Mes templates
-            </a>
-          </div>
+          <button
+            className={`nav-burger ${isOpen ? 'active' : ''}`}
+            id="burger"
+            aria-label="Menu"
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-      )}
-    </header>
-  );
+      </nav>
+
+      <div className={`nav-mobile ${isOpen ? 'open' : ''}`} id="mobileNav">
+        <a href={getHashHref('about')} onClick={() => setIsOpen(false)}>À propos</a>
+        <a href={getHashHref('services')} onClick={() => setIsOpen(false)}>Services</a>
+        <a href={getHashHref('projects')} onClick={() => setIsOpen(false)}>Projets</a>
+        <a href={templatesUrl} target="_blank" rel="noreferrer" onClick={() => setIsOpen(false)}>
+          Templates ↗
+        </a>
+        <a href={getHashHref('contact')} onClick={() => setIsOpen(false)} className="nav-mobile-cta">
+          Démarrer un projet →
+        </a>
+      </div>
+    </>
+  )
 }

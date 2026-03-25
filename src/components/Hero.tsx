@@ -1,59 +1,89 @@
-import { motion } from "framer-motion";
+import { ArrowUpRight } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 export default function Hero() {
   return (
-    <section
-      id="home"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24"
-    >
-      <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-[#f2d7e4] blur-[100px]" />
-      <div className="pointer-events-none absolute -right-20 top-40 h-80 w-80 rounded-full bg-[#eec8da] blur-[120px]" />
+    <section id="home" className="hero">
+      <div className="hero-bg-orb hero-bg-orb-1"></div>
+      <div className="hero-bg-orb hero-bg-orb-2"></div>
+      <div className="hero-bg-orb hero-bg-orb-3"></div>
 
-      <div className="relative mx-auto max-w-4xl text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mb-6 font-serif text-5xl leading-tight text-gray-900 md:text-7xl"
-          style={{ fontFamily: '"Playfair Display", serif' }}
-        >
-          Création de sites web
-          <br />
-          <span className="italic text-[#d86aa2]">modernes & performants</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-500 md:text-xl"
-        >
-          Je conçois des sites élégants, rapides et pensés pour donner une vraie
-          image professionnelle à ton activité et convertir tes visiteurs en
-          clients.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
-        >
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0f172a] px-8 py-4 font-medium text-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#d86aa2] hover:text-white hover:shadow-lg"
+      <div className="container">
+        <div className="hero-content">
+          <motion.div
+            className="hero-badge"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            Travailler avec moi
-          </a>
+            <span className="hero-badge-dot"></span>
+            Disponible pour de nouveaux projets
+          </motion.div>
 
-          <a
-            href="#projects"
-            className="rounded-full border border-gray-200 bg-white/70 px-8 py-4 text-gray-900 backdrop-blur-sm transition hover:bg-white"
+          <motion.h1
+            className="hero-title"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.1 }}
           >
-            Voir mes projets
-          </a>
-        </motion.div>
+            Des sites web qui
+            <br />
+            <em>inspirent confiance</em>
+            <br />
+            et convertissent.
+          </motion.h1>
+
+          <motion.p
+            className="hero-sub"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+          >
+            Je conçois des sites élégants, rapides et pensés pour donner une vraie image
+            professionnelle à votre activité — et transformer vos visiteurs en clients.
+          </motion.p>
+
+          <motion.div
+            className="hero-actions"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, delay: 0.3 }}
+          >
+            <a href="#contact" className="btn-primary">
+              <span>Démarrer mon projet</span>
+              <ArrowUpRight size={16} strokeWidth={2} />
+            </a>
+            <a href="#projects" className="btn-ghost">
+              Voir mes réalisations
+            </a>
+          </motion.div>
+
+          <motion.div
+            className="hero-stats"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+          >
+            <div className="hero-stat">
+              <span className="hero-stat-num">100%</span>
+              <span className="hero-stat-label">Code sur mesure</span>
+            </div>
+            <div className="hero-stat">
+              <span className="hero-stat-num">5★</span>
+              <span className="hero-stat-label">Satisfaction client</span>
+            </div>
+            <div className="hero-stat">
+              <span className="hero-stat-num">48h</span>
+              <span className="hero-stat-label">Réponse garantie</span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="hero-scroll" aria-hidden="true">
+        <span>Défiler</span>
+        <div className="hero-scroll-line"></div>
       </div>
     </section>
-  );
+  )
 }
