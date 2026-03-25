@@ -1,5 +1,5 @@
-import { ArrowUpRight } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
@@ -20,18 +20,18 @@ export default function Hero() {
             Disponible pour de nouveaux projets
           </motion.div>
 
-          <motion.h1
-            className="hero-title"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1 }}
-          >
-            Des sites web qui
-            <br />
-            <em>inspirent confiance</em>
-            <br />
-            et convertissent.
-          </motion.h1>
+<motion.h1
+  className="hero-title"
+  initial={{ opacity: 0, y: 24 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.9, delay: 0.1 }}
+>
+  Des sites web qui
+  <br />
+  <em>inspirent confiance</em>
+  <br />
+  et boostent votre <em>visibilité</em>
+</motion.h1>
 
           <motion.p
             className="hero-sub"
@@ -39,8 +39,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            Je conçois des sites élégants, rapides et pensés pour donner une vraie image
-            professionnelle à votre activité — et transformer vos visiteurs en clients.
+            Je conçois des sites élégants, rapides et pensés pour donner une
+            vraie image professionnelle à votre activité — et transformer vos
+            visiteurs en clients.
           </motion.p>
 
           <motion.div
@@ -85,5 +86,5 @@ export default function Hero() {
         <div className="hero-scroll-line"></div>
       </div>
     </section>
-  )
+  );
 }

@@ -13,9 +13,9 @@ export default function Projects() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2 className="section-title">
-                Ce que je
+                Voici mes
                 <br />
-                <em>crée concrètement</em>
+                <em>Projets récents</em>
               </h2>
             </FadeIn>
           </div>

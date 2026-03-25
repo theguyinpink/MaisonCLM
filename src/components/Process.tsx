@@ -17,7 +17,7 @@ const steps = [
     number: '03',
     title: 'Design & développement',
     description:
-      'Je conçois et développe votre site avec retours réguliers pour vous garder dans la boucle.',
+      'Je conçois et développe votre site avec un suivi attentif et des retours réguliers, pour une collaboration fluide à chaque étape.',
   },
   {
     number: '04',
