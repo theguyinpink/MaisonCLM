@@ -14,6 +14,8 @@ import MentionsLegales from './pages/MentionsLegales'
 import Confidentialite from './pages/Confidentialite'
 import ScrollToHash from './components/ScrollToHash'
 
+
+
 const shared = {
   email: 'maison.clm.contact@gmail.com',
   formUrl: 'https://forms.gle/FnAXqJFYDrvXt5H56',
