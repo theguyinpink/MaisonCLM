@@ -20,33 +20,12 @@ const reassurance = [
   'Orientation honnête selon votre besoin',
 ]
 
-const EMAIL_SUBJECT = 'Demande de site web'
-const EMAIL_BODY = `Bonjour,
-
-Je vous contacte pour discuter de mon projet web.
-
-Merci.`
-
 const gmailComposeUrl = (email: string) => {
-  const params = new URLSearchParams({
-    view: 'cm',
-    fs: '1',
-    tf: '1',
-    to: email,
-    su: EMAIL_SUBJECT,
-    body: EMAIL_BODY,
-  })
-
-  return `https://mail.google.com/mail/?${params.toString()}`
+  return `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`
 }
 
 const mailtoUrl = (email: string) => {
-  const params = new URLSearchParams({
-    subject: EMAIL_SUBJECT,
-    body: EMAIL_BODY,
-  })
-
-  return `mailto:${email}?${params.toString()}`
+  return `mailto:${email}`
 }
 
 const detectMobile = () => {
@@ -156,7 +135,7 @@ export default function Contact({ email, formUrl }: ContactProps) {
                 <p className="contact-email-note">
                   {isMobile
                     ? "Sur téléphone, le bouton ouvre votre application mail."
-                    : 'Sur ordinateur, le bouton ouvre directement Gmail dans un nouvel onglet.'}
+                    : 'Sur ordinateur, le bouton ouvre Gmail avec votre adresse déjà renseignée.'}
                 </p>
 
                 <div className="contact-trust">
