@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
 import FadeIn from './FadeIn'
 
@@ -20,19 +20,64 @@ const reassurance = [
   'Orientation honnête selon votre besoin',
 ]
 
+const EMAIL_SUBJECT = 'Demande de site web'
+const EMAIL_BODY = `Bonjour,
+
+Je vous contacte pour discuter de mon projet web.
+
+Merci.`
+
 const gmailComposeUrl = (email: string) => {
   const params = new URLSearchParams({
     view: 'cm',
     fs: '1',
     tf: '1',
     to: email,
+    su: EMAIL_SUBJECT,
+    body: EMAIL_BODY,
   })
 
   return `https://mail.google.com/mail/?${params.toString()}`
 }
 
+const mailtoUrl = (email: string) => {
+  const params = new URLSearchParams({
+    subject: EMAIL_SUBJECT,
+    body: EMAIL_BODY,
+  })
+
+  return `mailto:${email}?${params.toString()}`
+}
+
+const detectMobile = () => {
+  if (typeof window === 'undefined') return false
+
+  const ua = navigator.userAgent || navigator.vendor
+
+  const isMobileUA =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)
+
+  const isSmallScreen = window.matchMedia('(max-width: 768px)').matches
+
+  return isMobileUA || isSmallScreen
+}
+
 export default function Contact({ email, formUrl }: ContactProps) {
   const [copied, setCopied] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const updateDeviceType = () => {
+      setIsMobile(detectMobile())
+    }
+
+    updateDeviceType()
+    window.addEventListener('resize', updateDeviceType)
+
+    return () => {
+      window.removeEventListener('resize', updateDeviceType)
+    }
+  }, [])
 
   const handleCopyEmail = async () => {
     try {
@@ -43,6 +88,9 @@ export default function Contact({ email, formUrl }: ContactProps) {
       setCopied(false)
     }
   }
+
+  const emailHref = isMobile ? mailtoUrl(email) : gmailComposeUrl(email)
+
   return (
     <section id="contact" className="contact">
       <div className="container">
@@ -65,32 +113,50 @@ export default function Contact({ email, formUrl }: ContactProps) {
                 </p>
 
                 <div className="contact-actions">
-                  <a id="contact-form-link" href={formUrl} target="_blank" rel="noreferrer" className="btn-rose">
+                  <a
+                    id="contact-form-link"
+                    href={formUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-rose"
+                  >
                     Remplir le formulaire
                     <ArrowUpRight size={16} strokeWidth={2} />
                   </a>
+
                   <a
                     id="contact-email-link"
-                    href={gmailComposeUrl(email)}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={emailHref}
+                    target={isMobile ? undefined : '_blank'}
+                    rel={isMobile ? undefined : 'noreferrer noopener'}
                     className="btn-outline-white"
-                    aria-label={`Ouvrir Gmail pour écrire à ${email}`}
+                    aria-label={
+                      isMobile
+                        ? `Envoyer un email à ${email}`
+                        : `Ouvrir Gmail pour écrire à ${email}`
+                    }
                   >
                     <Mail size={16} strokeWidth={2} />
-                    M&apos;écrire directement
+                    {isMobile ? "M'envoyer un email" : 'Ouvrir dans Gmail'}
                   </a>
                 </div>
 
                 <div className="contact-email-helper">
                   <span className="contact-email-text">{email}</span>
-                  <button type="button" className="contact-copy-btn" onClick={handleCopyEmail}>
+                  <button
+                    type="button"
+                    className="contact-copy-btn"
+                    onClick={handleCopyEmail}
+                  >
                     <Copy size={14} strokeWidth={2} />
-                    {copied ? "Adresse copiée" : "Copier l'adresse"}
+                    {copied ? 'Adresse copiée' : "Copier l'adresse"}
                   </button>
                 </div>
+
                 <p className="contact-email-note">
-                  Le bouton email ouvre directement la composition dans Gmail, avec votre adresse déjà prête.
+                  {isMobile
+                    ? "Sur téléphone, le bouton ouvre votre application mail."
+                    : 'Sur ordinateur, le bouton ouvre directement Gmail dans un nouvel onglet.'}
                 </p>
 
                 <div className="contact-trust">
