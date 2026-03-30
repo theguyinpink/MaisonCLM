@@ -13,14 +13,20 @@ export default function Projects() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <h2 className="section-title">
-                Voici mes
+                Des projets pensés pour montrer
                 <br />
-                <em>Projets récents</em>
+                le niveau de <em>design et d&apos;exécution</em>
               </h2>
+            </FadeIn>
+            <FadeIn delay={0.15}>
+              <p className="projects-intro">
+                Un mélange de projet client réel et de concepts avancés pour montrer le
+                soin apporté à l&apos;interface, au parcours et à la présentation d&apos;une offre.
+              </p>
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.15}>
+          <FadeIn delay={0.2}>
             <a
               href="https://github.com/maison-clm"
               target="_blank"
@@ -54,13 +60,26 @@ export default function Projects() {
                 </div>
 
                 <div className="project-body">
+                  <div className="project-meta">{project.kind}</div>
                   <h3 className="project-name">{project.title}</h3>
                   <p className="project-desc">{project.description}</p>
+
+                  <div className="project-objective">
+                    <span>Objectif</span>
+                    <p>{project.objective}</p>
+                  </div>
+
+                  <ul className="project-highlights">
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight}>{highlight}</li>
+                    ))}
+                  </ul>
+
                   <div className="project-links">
                     {project.confidential ? (
                       <span className="project-link-secondary project-link-static">
                         <Lock size={14} strokeWidth={2} />
-                        Accès privé
+                        Aperçu privé
                       </span>
                     ) : (
                       <>

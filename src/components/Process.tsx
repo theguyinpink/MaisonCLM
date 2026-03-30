@@ -3,28 +3,35 @@ import FadeIn from './FadeIn'
 const steps = [
   {
     number: '01',
-    title: 'Échange & brief',
+    title: 'Échange & cadrage',
     description:
-      'On discute de votre projet, vos objectifs, votre cible et vos attentes pour définir le périmètre exact.',
+      'On clarifie votre activité, vos objectifs, votre cible et le type de site le plus pertinent.',
   },
   {
     number: '02',
-    title: 'Devis & validation',
+    title: 'Devis & direction',
     description:
-      'Je vous envoie un devis détaillé et un planning. Votre validation lance officiellement le projet.',
+      'Je vous propose un cadre clair : budget, structure, rythme de travail et niveau de personnalisation.',
   },
   {
     number: '03',
     title: 'Design & développement',
     description:
-      'Je conçois et développe votre site avec un suivi attentif et des retours réguliers, pour une collaboration fluide à chaque étape.',
+      'Je construis votre site avec des retours réguliers pour garder un résultat cohérent et maîtrisé.',
   },
   {
     number: '04',
-    title: 'Livraison & suivi',
+    title: 'Livraison & suite',
     description:
-      'Mise en ligne, formation et support post-livraison pour que vous soyez 100% autonome.',
+      'Vous repartez avec un site propre, compréhensible et prêt à être utilisé ou à évoluer.',
   },
+]
+
+const summary = [
+  'Brief simplifié',
+  'Retours réguliers',
+  'Code sur mesure',
+  'Livraison propre',
 ]
 
 export default function Process() {
@@ -36,7 +43,7 @@ export default function Process() {
           <h2 className="section-title process-title">
             Un process simple,
             <br />
-            <em>des résultats concrets</em>
+            <em>sans friction inutile</em>
           </h2>
         </div>
 
@@ -49,6 +56,12 @@ export default function Process() {
                 <p className="process-step-desc">{step.description}</p>
               </div>
             </FadeIn>
+          ))}
+        </div>
+
+        <div className="process-summary">
+          {summary.map((item) => (
+            <span key={item} className="process-summary-item">{item}</span>
           ))}
         </div>
       </div>

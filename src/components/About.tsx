@@ -1,5 +1,24 @@
 import FadeIn from './FadeIn'
 
+const highlights = [
+  {
+    title: 'Image haut de gamme',
+    description: 'Un design qui valorise votre activité et vous rend plus crédible.',
+  },
+  {
+    title: 'Parcours fluide',
+    description: 'Une navigation claire pour aider vos visiteurs à comprendre vite.',
+  },
+  {
+    title: 'Messages plus nets',
+    description: 'Des sections structurées pour mettre en avant votre valeur.',
+  },
+  {
+    title: 'CTA visibles',
+    description: 'Des appels à l’action placés au bon moment pour favoriser le contact.',
+  },
+]
+
 export default function About() {
   return (
     <section id="about" className="about">
@@ -9,42 +28,48 @@ export default function About() {
             <div>
               <div className="section-label">À propos</div>
               <h2 className="section-title">
-                L'art du détail
+                Un site beau, oui.
                 <br />
-                au service du <em>web</em>
+                Un site clair et <em>crédible</em>, surtout.
               </h2>
-              <p className="about-body">
-                Je crée des sites modernes, soignés visuellement, professionnels et pensés
-                pour inspirer confiance. Mon objectif n&apos;est pas seulement de faire un
-                &quot;beau site&quot;, mais un site utile, clair et crédible.
+              <p className="about-body about-lead">
+                Maison CLM, c&apos;est une approche du web qui mélange esthétique,
+                clarté et sens du détail pour créer des sites qui donnent confiance.
               </p>
               <p className="about-body">
-                J&apos;aime travailler les interfaces avec soin, en mettant l&apos;accent sur
-                l&apos;esthétique, la fluidité, la lisibilité et la conversion. Chaque pixel a
-                une raison d&apos;être.
+                Mon objectif n&apos;est pas seulement de faire une interface élégante,
+                mais un site qui aide vraiment votre activité à mieux se présenter,
+                mieux se différencier et mieux convertir.
               </p>
               <blockquote className="about-quote">
-                &quot;Un bon site ne se remarque pas — il convainc naturellement.&quot;
+                &quot;Chaque section doit soit clarifier, soit rassurer, soit donner envie
+                d&apos;agir.&quot;
               </blockquote>
             </div>
           </FadeIn>
 
           <FadeIn className="about-visual" delay={0.2}>
             <div className="about-card">
-              <div className="about-stat-row">
-                <div className="about-stat-item">
-                  <span className="about-stat-num">+1</span>
-                  <span className="about-stat-label">Projet livré</span>
-                </div>
-                <div className="about-stat-item">
-                  <span className="about-stat-num">100%</span>
-                  <span className="about-stat-label">Code sur mesure</span>
-                </div>
-                <div className="about-stat-item">
-                  <span className="about-stat-num about-stat-num-small">1 objectif</span>
-                  <span className="about-stat-label">Un site qui convertit</span>
-                </div>
+              <div className="about-card-header">
+                <span className="about-card-kicker">La base Maison CLM</span>
+                <p className="about-card-note">
+                  Un site utile commence par une structure pensée pour votre image et
+                  pour votre futur client.
+                </p>
               </div>
+
+              <div className="about-highlights">
+                {highlights.map((item) => (
+                  <div key={item.title} className="about-highlight-card">
+                    <strong>{item.title}</strong>
+                    <p>{item.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="about-note">
+                Design premium, responsive, messages structurés et code sur mesure.
+              </p>
             </div>
           </FadeIn>
         </div>
