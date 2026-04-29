@@ -17,7 +17,7 @@ const quickFacts = [
     label: 'Réponse estimée',
   },
   {
-    value: '400€',
+    value: '490€',
     label: 'Offre de départ',
   },
 ]
