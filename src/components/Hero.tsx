@@ -17,7 +17,7 @@ const quickFacts = [
     label: 'Réponse estimée',
   },
   {
-    value: '490€',
+    value: '150git add .€',
     label: 'Offre de départ',
   },
 ]

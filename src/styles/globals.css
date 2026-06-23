@@ -774,6 +774,39 @@ section {
   display: block;
 }
 
+.service-price-box-sale {
+  background: linear-gradient(135deg, rgba(242, 215, 228, 0.42), rgba(255, 255, 255, 0.9));
+}
+
+.service-price-sale-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.service-price-old {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(14, 12, 20, 0.48);
+  line-height: 1;
+}
+
+.service-price-old::after {
+  content: '';
+  position: absolute;
+  left: -0.22rem;
+  right: -0.22rem;
+  top: 50%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--rose);
+  transform: rotate(-7deg);
+  transform-origin: center;
+}
+
 .service-price-value {
   font-family: var(--serif);
   font-size: 1.625rem;
@@ -781,6 +814,18 @@ section {
   color: var(--ink);
   line-height: 1.2;
   display: block;
+}
+
+.service-price-value-sale {
+  color: var(--rose-deep);
+}
+
+.service-price-note {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 0.76rem;
+  color: rgba(14, 12, 20, 0.58);
+  font-weight: 300;
 }
 
 .service-price-value-small {

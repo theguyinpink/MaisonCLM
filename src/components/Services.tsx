@@ -64,13 +64,30 @@ export default function Services() {
                     ))}
                   </ul>
 
-                  <div className="service-price-box">
+                  <div className={`service-price-box ${service.originalPricing ? 'service-price-box-sale' : ''}`}>
                     <span className="service-price-label">{service.pricingLabel}</span>
-                    <span
-                      className={`service-price-value ${service.pricing === 'Sur devis' ? 'service-price-value-small' : ''}`}
-                    >
-                      {service.pricing}
-                    </span>
+                    {service.originalPricing ? (
+                      <>
+                        <div className="service-price-sale-row">
+                          <span
+                            className="service-price-old"
+                            aria-label={`Ancien prix ${service.originalPricing}`}
+                          >
+                            {service.originalPricing}
+                          </span>
+                          <span className="service-price-value service-price-value-sale">
+                            {service.pricing}
+                          </span>
+                        </div>
+                        <span className="service-price-note">Tarif spécial premiers clients</span>
+                      </>
+                    ) : (
+                      <span
+                        className={`service-price-value ${service.pricing === 'Sur devis' ? 'service-price-value-small' : ''}`}
+                      >
+                        {service.pricing}
+                      </span>
+                    )}
                   </div>
 
                   <a href="#contact" className="service-cta-link" onClick={handleScrollToContact}>
