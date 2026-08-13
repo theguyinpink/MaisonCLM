@@ -12,6 +12,8 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import MentionsLegales from './pages/MentionsLegales'
 import Confidentialite from './pages/Confidentialite'
+import AuditPage from './pages/AuditPage'
+import SocialsPage from './pages/SocialsPage'
 import ScrollToHash from './components/ScrollToHash'
 
 
@@ -21,6 +23,7 @@ const shared = {
   formUrl: 'https://forms.gle/FnAXqJFYDrvXt5H56',
   templatesUrl: 'https://app.maisonclm.fr',
   linkedinUrl: 'https://www.linkedin.com/in/cl%C3%A9ment-carr%C3%A9-a6971624a/',
+  auditUrl: '/audit',
 }
 
 function HomePage() {
@@ -36,7 +39,7 @@ function HomePage() {
         <Process />
         <Projects />
         <Faq />
-        <Contact email={shared.email} formUrl={shared.formUrl} />
+        <Contact email={shared.email} formUrl={shared.formUrl} auditUrl={shared.auditUrl} />
       </main>
 
       <Footer templatesUrl={shared.templatesUrl} linkedinUrl={shared.linkedinUrl} />
@@ -60,6 +63,15 @@ export default function App() {
       <ScrollToHash />
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route
+          path="/audit"
+          element={(
+            <LegalPageLayout>
+              <AuditPage email={shared.email} fallbackFormUrl={shared.formUrl} />
+            </LegalPageLayout>
+          )}
+        />
+        <Route path="/socials" element={<SocialsPage />} />
         <Route
           path="/mentions-legales"
           element={(

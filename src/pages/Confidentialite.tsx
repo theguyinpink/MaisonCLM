@@ -18,8 +18,9 @@ export default function Confidentialite() {
           <div className="legal-block">
             <h2>Collecte des données</h2>
             <p>
-              Les données collectées via le formulaire de contact ou par email sont
-              utilisées uniquement dans le cadre d’échanges professionnels.
+              Les données collectées via le formulaire de contact, la demande de
+              mini-audit ou par email sont utilisées uniquement dans le cadre
+              d’échanges professionnels.
             </p>
           </div>
 
@@ -29,6 +30,8 @@ export default function Confidentialite() {
             <ul>
               <li>Nom</li>
               <li>Adresse email</li>
+              <li>Nom de l’organisation</li>
+              <li>Adresse du site à analyser</li>
               <li>Contenu du message</li>
             </ul>
           </div>
@@ -37,7 +40,8 @@ export default function Confidentialite() {
             <h2>Finalité du traitement</h2>
             <p>
               Les données sont utilisées exclusivement pour répondre aux demandes de
-              contact et échanger dans un cadre professionnel.
+              contact, préparer le mini-audit demandé et échanger dans un cadre
+              professionnel.
             </p>
           </div>
 

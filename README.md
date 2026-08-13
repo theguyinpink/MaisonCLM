@@ -1,75 +1,42 @@
-# React + TypeScript + Vite
+# Maison CLM
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site vitrine Maison CLM construit avec React, TypeScript et Vite.
 
-Currently, two official plugins are available:
+## Pages principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `/` : site vitrine
+- `/socials` : hub de liens Maison CLM
+- `/audit` : demande de mini-audit gratuit
+- `/mentions-legales` et `/confidentialite` : pages légales
 
-## React Compiler
+Le bouton d’audit prépare un email prérempli vers
+`maison.clm.contact@gmail.com`. Le visiteur vérifie puis envoie lui-même le
+message depuis sa messagerie. Le formulaire Google existant reste proposé en
+solution de secours.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Lancer le projet
 
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Construire la version de production
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
+
+Le résultat prêt à héberger est généré dans `dist/`.
+
+## Mise en ligne des sous-pages
+
+Le projet contient déjà les règles de réécriture nécessaires aux routes React :
+
+- `vercel.json` pour Vercel ;
+- `public/_redirects` pour Netlify et hébergeurs compatibles ;
+- `public/.htaccess` pour un hébergement Apache.
+
+Si le site est déployé sur Vercel, importez le dossier du projet et conservez
+le framework Vite. Les adresses finales seront automatiquement
+`https://www.maisonclm.fr/socials` et `https://www.maisonclm.fr/audit`.

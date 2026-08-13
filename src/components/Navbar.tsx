@@ -25,10 +25,6 @@ export default function Navbar({ templatesUrl }: NavbarProps) {
     }
   }, [isOpen])
 
-  useEffect(() => {
-    setIsOpen(false)
-  }, [location.pathname, location.hash])
-
   const getHashHref = useMemo(
     () => (id: string) => (location.pathname === '/' ? `#${id}` : `/#${id}`),
     [location.pathname],
@@ -38,7 +34,12 @@ export default function Navbar({ templatesUrl }: NavbarProps) {
     <>
       <nav id="navbar" className={`nav ${isScrolled ? 'scrolled' : ''}`}>
         <div className="container nav-inner">
-          <a className="nav-logo" href={location.pathname === '/' ? '#home' : '/#home'} aria-label="Maison CLM accueil">
+          <a
+            className="nav-logo"
+            href={location.pathname === '/' ? '#home' : '/#home'}
+            aria-label="Maison CLM accueil"
+            onClick={() => setIsOpen(false)}
+          >
             <img src="/logo-noir.png" alt="Maison CLM" className="nav-logo-image" />
           </a>
 

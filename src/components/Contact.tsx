@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import FadeIn from './FadeIn'
 
 type ContactProps = {
   email: string
   formUrl: string
+  auditUrl: string
 }
 
 const checklist = [
@@ -41,7 +43,7 @@ const detectMobile = () => {
   return isMobileUA || isSmallScreen
 }
 
-export default function Contact({ email, formUrl }: ContactProps) {
+export default function Contact({ email, formUrl, auditUrl }: ContactProps) {
   const [copied, setCopied] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -146,6 +148,11 @@ export default function Contact({ email, formUrl }: ContactProps) {
                     </div>
                   ))}
                 </div>
+
+                <Link to={auditUrl} className="contact-audit-link">
+                  Vous avez déjà un site ? Demandez votre mini-audit gratuit
+                  <ArrowUpRight size={15} strokeWidth={2} />
+                </Link>
               </div>
 
               <div className="contact-side-card">

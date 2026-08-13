@@ -36,6 +36,8 @@ export default function Footer({ templatesUrl, linkedinUrl = '#' }: FooterProps)
             </div>
           </div>
           <div className="footer-links footer-links-top">
+            <Link to="/audit">Mini-audit gratuit</Link>
+            <Link to="/socials">Tous nos liens</Link>
             <a href={templatesUrl} target="_blank" rel="noreferrer">Templates</a>
             <a href={linkedinUrl} target="_blank" rel="noreferrer">LinkedIn</a>
             <a href={gmailComposeUrl(email)} target="_blank" rel="noreferrer">

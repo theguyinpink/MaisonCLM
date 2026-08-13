@@ -1,5 +1,12 @@
 # Changements appliqués
 
+## Nouvelles pages
+- Hub éditorial `/socials` avec Instagram, TikTok et LinkedIn
+- Parcours `/audit` avec questionnaire natif et préparation d’un email détaillé
+- Paramètres UTM du hub conservés dans la demande d’audit
+- Liens vers les deux pages ajoutés au contact, au footer et au sitemap
+- Réécritures SPA incluses pour Vercel, Netlify et Apache
+
 ## Design
 - Hero enrichi avec bénéfices concrets et panneau de valeur
 - About retravaillé avec cartes de bénéfices plus premium

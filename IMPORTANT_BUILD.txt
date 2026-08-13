@@ -1,20 +1,9 @@
-Ce zip contient la version modifiée du site Maison CLM orientée design / UX / conversion.
+Version vérifiée le 13 août 2026.
 
-Important :
-- Le code source a bien été mis à jour.
-- La vérification TypeScript a été passée avec succès.
-- Le rebuild Vite du dossier dist n'a pas pu être régénéré ici, car le node_modules fourni dans le zip d'origine est incomplet pour Rollup (dépendance optionnelle native manquante : @rollup/rollup-linux-x64-gnu).
+- npm run lint : OK
+- npm run build : OK
+- le dossier dist a été régénéré et est inclus dans le ZIP
+- les routes /socials et /audit sont intégrées au site principal
 
-Pour reconstruire le site chez toi :
-1. Supprime node_modules si besoin
-2. Lance : npm install
-3. Lance : npm run build
-
-Les modifications principales concernent :
-- Hero plus convaincant
-- Section de valeur ajoutée ajoutée
-- Services plus vendeurs
-- Projets plus crédibles / détaillés
-- FAQ de réassurance ajoutée
-- Contact retravaillé pour réduire la friction
-- Métadonnées HTML améliorées
+Le dossier node_modules n’est volontairement pas inclus dans le ZIP.
+Pour reprendre le développement : npm install puis npm run dev.
