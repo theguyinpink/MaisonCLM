@@ -1,9 +1,14 @@
-Version vérifiée le 13 août 2026.
+Version vérifiée le 5 octobre 2026.
 
-- npm run lint : OK
-- npm run build : OK
-- le dossier dist a été régénéré et est inclus dans le ZIP
-- les routes /socials et /audit sont intégrées au site principal
+- npm run lint : OK.
+- npm run build : OK.
+- Affichage sur 9 formats, de 320 × 480 à 1440 × 1000 : les 4 cartes sont visibles sans défilement et disposées sur deux colonnes.
+- Pas de débordement horizontal ni d’erreur JavaScript observée.
+- Les routes /social et /socials, l’accès à l’audit, le contact et les pages légales ont été vérifiés.
+- La copie du lien via le bouton de partage a été vérifiée.
+- Le dossier dist a été régénéré et est inclus dans ce ZIP.
+- Les aperçus sont dans le dossier apercus.
 
-Le dossier node_modules n’est volontairement pas inclus dans le ZIP.
-Pour reprendre le développement : npm install puis npm run dev.
+Pour mettre en ligne, utiliser le dossier dist ou importer le projet dans Vercel.
+Pour reprendre le développement : npm ci, puis npm run dev.
+Le dossier node_modules n’est pas inclus.

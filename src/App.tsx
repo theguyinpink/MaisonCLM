@@ -71,6 +71,7 @@ export default function App() {
             </LegalPageLayout>
           )}
         />
+        <Route path="/social" element={<SocialsPage />} />
         <Route path="/socials" element={<SocialsPage />} />
         <Route
           path="/mentions-legales"

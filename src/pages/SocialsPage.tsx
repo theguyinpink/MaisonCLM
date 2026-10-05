@@ -1,202 +1,155 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowUpRight, Check, ClipboardCheck, Globe2, Instagram, Linkedin, MessagesSquare, Share2, UsersRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import '../styles/socials.css'
 
-const socials = [
+const destinations = [
   {
-    name: 'Instagram',
-    handle: '@maisonclmfr',
-    url: 'https://www.instagram.com/maisonclmfr/',
+    name: 'CLM SportLink', label: 'Clubs & joueurs',
+    description: 'Gestion du club, réseau et boutique.',
+    action: 'Ouvrir SportLink', url: 'https://sportlink.maisonclm.fr',
+    icon: UsersRound, style: 'sportlink', external: true,
   },
   {
-    name: 'TikTok',
-    handle: '@maisonclm',
-    url: 'https://www.tiktok.com/@maisonclm',
+    name: 'Site officiel', label: 'Maison CLM',
+    description: 'Sites web et outils sur mesure.',
+    action: 'Visiter le site', url: '/', icon: Globe2, style: 'website',
   },
   {
-    name: 'LinkedIn',
-    handle: 'Maison CLM',
-    url: 'https://www.linkedin.com/company/maisonclm',
+    name: 'Mini-audit gratuit', label: 'Offert',
+    description: '3 conseils pour améliorer votre site.',
+    action: 'Demander l’audit',
+    url: '/audit?utm_source=socials&utm_medium=bio&utm_campaign=audit_gratuit',
+    icon: ClipboardCheck, style: 'audit',
+  },
+  {
+    name: 'Votre projet', label: 'On en parle ?',
+    description: 'Une idée ? Parlons de votre projet.',
+    action: 'Contacter Clément', url: '/#contact', icon: MessagesSquare, style: 'contact',
   },
 ]
 
+const socials = [
+  { name: 'Instagram', handle: '@maisonclmfr', url: 'https://www.instagram.com/maisonclmfr/', icon: Instagram },
+  { name: 'TikTok', handle: '@maisonclm', url: 'https://www.tiktok.com/@maisonclm', icon: null },
+  { name: 'LinkedIn', handle: 'Maison CLM', url: 'https://www.linkedin.com/company/maisonclm', icon: Linkedin },
+]
+
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 3v12.5a4.5 4.5 0 1 1-4-4.47M14 3c.4 3 2.4 5 5.5 5v3c-2.1 0-4-.8-5.5-2.1" />
+    </svg>
+  )
+}
+
 export default function SocialsPage() {
-  const [shareLabel, setShareLabel] = useState('Partager')
+  const [shareLabel, setShareLabel] = useState('Partager cette page')
+  const shareTimeout = useRef<ReturnType<typeof window.setTimeout> | null>(null)
 
   useEffect(() => {
     const previousTitle = document.title
-    document.title = 'Maison CLM — Tous nos liens'
+    document.title = 'Maison CLM — Projets & liens'
     return () => {
       document.title = previousTitle
+      if (shareTimeout.current !== null) window.clearTimeout(shareTimeout.current)
     }
   }, [])
 
   const handleShare = async () => {
     const shareData = {
-      title: 'Maison CLM',
-      text: 'Découvrez Maison CLM, ses projets et ses réseaux.',
-      url: window.location.href,
+      title: 'Maison CLM', text: 'Découvrez les projets et les liens Maison CLM.', url: window.location.href,
     }
-
-    try {
-      if (navigator.share) {
+    const showStatus = (label: string) => {
+      if (shareTimeout.current !== null) window.clearTimeout(shareTimeout.current)
+      setShareLabel(label)
+      shareTimeout.current = window.setTimeout(() => setShareLabel('Partager cette page'), 2500)
+    }
+    if (navigator.share) {
+      try {
         await navigator.share(shareData)
         return
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') return
       }
-
+    }
+    try {
       await navigator.clipboard.writeText(window.location.href)
-      setShareLabel('Lien copié')
-      window.setTimeout(() => setShareLabel('Partager'), 2200)
+      showStatus('Lien copié')
     } catch {
-      setShareLabel('Partager')
+      showStatus('Copiez le lien dans la barre d’adresse')
     }
   }
 
   return (
-    <div className="socials-page">
-      <div className="socials-noise" aria-hidden="true"></div>
-
-      <div className="socials-frame">
-        <nav className="socials-masthead" aria-label="Navigation principale">
-          <Link className="socials-brand" to="/">
-            <span className="socials-brand-mark">
-              <img src="/logo-noir.png" alt="" />
-            </span>
-            <span className="socials-brand-copy">
-              <strong>Maison CLM</strong>
-              <span>Studio digital indépendant</span>
+    <div className="social-hub">
+      <div className="social-hub-frame">
+        <header className="social-hub-header">
+          <Link className="social-hub-brand" to="/" aria-label="Maison CLM — site officiel">
+            <span className="social-hub-logo"><img src="/logo-noir.png" alt="" width="40" height="40" /></span>
+            <span>
+              <strong>Maison CLM<span aria-hidden="true">.</span></strong>
+              <small>Des idées qui prennent vie.</small>
             </span>
           </Link>
-
-          <button className="socials-share" type="button" onClick={handleShare}>
-            <span className="socials-share-dot" aria-hidden="true"></span>
-            <span aria-live="polite">{shareLabel}</span>
+          <button className="social-hub-share" type="button" onClick={handleShare} aria-label={shareLabel}>
+            {shareLabel === 'Lien copié' ? <Check size={18} aria-hidden="true" /> : <Share2 size={18} aria-hidden="true" />}
           </button>
-        </nav>
-
+          <span className="social-hub-sr-only" role="status">{shareLabel === 'Partager cette page' ? '' : shareLabel}</span>
+        </header>
         <main>
-          <header className="socials-hero">
-            <div className="socials-hero-copy">
-              <p className="socials-kicker"><span>01</span> Bienvenue chez Maison CLM</p>
-              <h1>
-                Vos idées méritent
-                <em>mieux qu’un site ordinaire.</em>
-              </h1>
+          <section className="social-hub-projects" aria-labelledby="social-hub-title">
+            <div className="social-hub-section-heading">
+              <h1 id="social-hub-title">Les projets & les liens</h1>
+              <p>Choisissez votre destination.</p>
             </div>
-
-            <aside className="socials-founder-note">
-              <span className="socials-tape" aria-hidden="true"></span>
-              <p>Moi, c’est Clément.</p>
-              <strong>
-                Je transforme les idées en expériences digitales utiles, belles et simples
-                à utiliser.
-              </strong>
-              <span>— Clément, fondateur</span>
-            </aside>
-          </header>
-
-          <section className="socials-board" aria-label="Liens et projets Maison CLM">
-            <Link className="socials-tile socials-tile-main" to="/">
-              <div className="socials-tile-topline">
-                <span>01 / Site officiel</span>
-                <i aria-hidden="true">↗</i>
-              </div>
-              <div className="socials-tile-main-copy">
-                <span className="socials-eyebrow">Tout commence ici</span>
-                <h2>Entrez dans<br />l’univers Maison CLM.</h2>
-                <p>
-                  Sites web, applications et outils numériques pensés pour faire avancer
-                  vos projets.
-                </p>
-              </div>
-              <span className="socials-tile-url">maisonclm.fr</span>
-            </Link>
-
-            <Link
-              className="socials-tile socials-tile-audit"
-              to="/audit?utm_source=socials&utm_medium=bio&utm_campaign=audit_gratuit"
-            >
-              <div className="socials-audit-stamp" aria-hidden="true">
-                <strong>3</strong>
-                <span>conseils</span>
-              </div>
-              <div className="socials-tile-topline">
-                <span>02 / Offert</span>
-                <i aria-hidden="true">↗</i>
-              </div>
-              <div className="socials-tile-audit-copy">
-                <span className="socials-eyebrow">Mini-audit gratuit</span>
-                <h2>Votre site a du potentiel.<br />Voyons où.</h2>
-                <p>Trois recommandations personnalisées, concrètes et sans engagement.</p>
-                <span className="socials-text-link">Demander mon audit <b>→</b></span>
-              </div>
-            </Link>
-
-            <Link
-              className="socials-tile socials-tile-product socials-tile-asso"
-              to="/?interest=clm-asso#contact"
-            >
-              <div className="socials-tile-topline">
-                <span>03 / Pour les clubs</span>
-                <i aria-hidden="true">↗</i>
-              </div>
-              <div className="socials-product-symbol" aria-hidden="true">A</div>
-              <div className="socials-product-copy">
-                <span className="socials-eyebrow">Une idée pour votre club ?</span>
-                <h2>CLM Asso</h2>
-                <p>Échangeons sur les besoins de votre association et la bonne solution.</p>
-              </div>
-              <ul aria-label="Sujets CLM Asso">
-                <li>Équipes</li>
-                <li>Organisation</li>
-                <li>Documents</li>
-              </ul>
-            </Link>
-
-            <Link
-              className="socials-tile socials-tile-product socials-tile-sport"
-              to="/?interest=clm-sportlink#contact"
-            >
-              <div className="socials-tile-topline">
-                <span>04 / Sport</span>
-                <i aria-hidden="true">↗</i>
-              </div>
-              <div className="socials-product-symbol" aria-hidden="true">S</div>
-              <div className="socials-product-copy">
-                <span className="socials-eyebrow">Projet en construction</span>
-                <h2>CLM SportLink</h2>
-                <p>Un futur espace pensé pour connecter les profils du monde sportif.</p>
-              </div>
-              <ul aria-label="Profils CLM SportLink">
-                <li>Clubs</li>
-                <li>Joueurs</li>
-                <li>Staff</li>
-              </ul>
-            </Link>
-          </section>
-
-          <section className="socials-network-section" aria-labelledby="socials-title">
-            <div>
-              <p className="socials-kicker"><span>02</span> Les coulisses</p>
-              <h2 id="socials-title">On se retrouve<br />aussi par ici.</h2>
-            </div>
-            <div className="socials-network-list">
-              {socials.map((social) => (
-                <a key={social.name} href={social.url} target="_blank" rel="noreferrer">
-                  <span>{social.name}</span>
-                  <small>{social.handle}</small>
-                  <i aria-hidden="true">↗</i>
-                </a>
-              ))}
+            <div className="social-hub-grid">
+              {destinations.map((destination) => {
+                const Icon = destination.icon
+                const content = (
+                  <>
+                    <div className="social-hub-card-top">
+                      <span className="social-hub-card-icon"><Icon size={21} aria-hidden="true" /></span>
+                      <span className="social-hub-card-label">{destination.label}</span>
+                    </div>
+                    <h2>{destination.name}</h2>
+                    <p>{destination.description}</p>
+                    <span className="social-hub-card-action">{destination.action}<ArrowUpRight size={15} aria-hidden="true" /></span>
+                  </>
+                )
+                const className = `social-hub-card social-hub-card--${destination.style}`
+                return destination.external ? (
+                  <a key={destination.name} className={className} href={destination.url} target="_blank" rel="noopener noreferrer">{content}</a>
+                ) : (
+                  <Link key={destination.name} className={className} to={destination.url}>{content}</Link>
+                )
+              })}
             </div>
           </section>
+          <section className="social-hub-networks" aria-labelledby="social-hub-networks-title">
+            <h2 id="social-hub-networks-title">Suivre Maison CLM</h2>
+            <div className="social-hub-network-list">
+              {socials.map((social) => {
+                const Icon = social.icon
+                return (
+                  <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" aria-label={`${social.name} — ${social.handle}`}>
+                    <span className="social-hub-network-icon">{Icon ? <Icon size={18} aria-hidden="true" /> : <TikTokIcon />}</span>
+                    <span>{social.name}</span>
+                    <ArrowUpRight className="social-hub-network-arrow" size={13} aria-hidden="true" />
+                  </a>
+                )
+              })}
+            </div>
+          </section>
+          <aside className="social-hub-note" aria-label="Un mot de Clément">
+            <p>Vos idées méritent mieux qu’un site ordinaire.</p>
+            <blockquote>« Je transforme les idées en expériences digitales utiles, belles et simples à utiliser. »</blockquote>
+            <span>Clément, fondateur de Maison CLM</span>
+          </aside>
         </main>
-
-        <footer className="socials-footer">
-          <p>Fait avec attention — pas avec un template.</p>
-          <div>
-            <span>Combs-la-Ville, France</span>
-            <span>© {new Date().getFullYear()} Maison CLM</span>
-          </div>
+        <footer className="social-hub-footer">
+          <span>© {new Date().getFullYear()} Maison CLM</span>
+          <div><Link to="/mentions-legales">Mentions légales</Link><Link to="/confidentialite">Confidentialité</Link></div>
         </footer>
       </div>
     </div>

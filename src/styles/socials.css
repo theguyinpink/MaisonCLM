@@ -1,0 +1,185 @@
+.social-hub {
+  --hub-ink: #282027;
+  --hub-muted: #766772;
+  --hub-rose: #92506e;
+  --hub-line: #ecdee5;
+  min-height: 100svh;
+  color: var(--hub-ink);
+  background: radial-gradient(ellipse at 50% 0%, #f8e6ef 0, transparent 550px), #fffafc;
+  font-family: var(--sans);
+}
+.social-hub-frame {
+  width: min(100% - 40px, 680px);
+  margin-inline: auto;
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
+}
+.social-hub main > section { padding: 0; }
+.social-hub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 32px 0 28px;
+}
+.social-hub-brand { display: inline-flex; align-items: center; gap: 11px; }
+.social-hub-logo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border: 1px solid #e9d1dd;
+  border-radius: 15px;
+  background: #f3d9e6;
+}
+.social-hub-logo img { width: 40px; height: 40px; object-fit: contain; }
+.social-hub-brand strong {
+  display: block;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.65px;
+}
+.social-hub-brand strong span { color: var(--hub-rose); }
+.social-hub-brand small { display: block; margin-top: 3px; color: var(--hub-muted); font-size: 11px; }
+.social-hub-share {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--hub-line);
+  border-radius: 50%;
+  color: var(--hub-ink);
+  background: #ffffffb3;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+.social-hub-share:hover { background: #f5e3ec; }
+.social-hub-section-heading { margin-bottom: 16px; }
+.social-hub-section-heading h1 {
+  margin: 0;
+  color: var(--hub-ink);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.75px;
+}
+.social-hub-section-heading p { margin: 5px 0 0; color: var(--hub-muted); font-size: 13px; line-height: 1.5; }
+.social-hub-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.social-hub-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 203px;
+  padding: 20px;
+  border: 1px solid var(--hub-line);
+  border-radius: 19px;
+  background: #fff;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.social-hub-card--sportlink { background: #f4dce8; border-color: #e9c4d6; }
+.social-hub-card--contact { background: #faf5f7; }
+.social-hub-card-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 14px; }
+.social-hub-card-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 11px;
+  color: var(--hub-rose);
+  background: #f8ebf1;
+}
+.social-hub-card--sportlink .social-hub-card-icon { background: #ffffffa6; }
+.social-hub-card--website .social-hub-card-icon { color: var(--hub-ink); }
+.social-hub-card-label { color: var(--hub-muted); font-size: 10px; line-height: 1.3; text-align: right; }
+.social-hub-card--audit .social-hub-card-label { padding: 4px 7px; border-radius: 6px; color: var(--hub-rose); background: #faedf3; }
+.social-hub-card h2 { margin: 0 0 7px; color: var(--hub-ink); font-size: 21px; font-weight: 500; line-height: 1.2; letter-spacing: -0.6px; }
+.social-hub-card p { max-width: 240px; margin: 0 0 15px; color: #675861; font-size: 13px; line-height: 1.55; }
+.social-hub-card-action { display: flex; align-items: center; justify-content: space-between; gap: 5px; margin-top: auto; color: var(--hub-rose); font-size: 12px; font-weight: 500; line-height: 1.4; }
+.social-hub-card-action svg { flex-shrink: 0; }
+@media (hover: hover) {
+  .social-hub-card:hover { border-color: #ce9ab3; box-shadow: 0 5px 18px #92506e0d; transform: translateY(-2px); }
+}
+.social-hub-networks { margin-top: 26px; }
+.social-hub-networks h2 { margin: 0 0 12px; color: var(--hub-muted); font-size: 12px; font-weight: 500; line-height: 1.5; }
+.social-hub-network-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.social-hub-network-list a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 8px;
+  border: 1px solid var(--hub-line);
+  border-radius: 12px;
+  background: #ffffffa6;
+  font-size: 12px;
+  transition: background 180ms ease;
+}
+.social-hub-network-list a:hover { background: #f5e3ec; }
+.social-hub-network-icon { display: flex; flex-shrink: 0; }
+.social-hub-network-icon svg { width: 18px; height: 18px; }
+.social-hub-network-arrow { color: var(--hub-muted); flex-shrink: 0; }
+.social-hub-note { margin-top: 27px; padding: 21px 12px 0; border-top: 1px solid var(--hub-line); text-align: center; }
+.social-hub-note p { margin: 0 0 7px; color: var(--hub-rose); font-family: var(--serif); font-size: 18px; font-weight: 500; line-height: 1.3; }
+.social-hub-note blockquote { max-width: 420px; margin: 0 auto 7px; color: var(--hub-muted); font-size: 12px; line-height: 1.6; }
+.social-hub-note > span { color: var(--hub-muted); font-size: 10px; }
+.social-hub-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-top: 30px; color: var(--hub-muted); font-size: 10px; line-height: 1.6; }
+.social-hub-footer div { display: flex; flex-wrap: wrap; gap: 13px; }
+.social-hub-footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.social-hub a:focus-visible, .social-hub button:focus-visible { outline: 2px solid var(--hub-rose); outline-offset: 4px; }
+.social-hub-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 560px) {
+  .social-hub-frame { width: calc(100% - 28px); }
+  .social-hub-header { padding: 20px 0 23px; }
+  .social-hub-logo { width: 44px; height: 44px; border-radius: 14px; }
+  .social-hub-logo img { width: 37px; height: 37px; }
+  .social-hub-brand strong { font-size: 19px; }
+  .social-hub-brand small { font-size: 10px; }
+  .social-hub-section-heading { margin-bottom: 13px; }
+  .social-hub-section-heading h1 { font-size: 21px; }
+  .social-hub-section-heading p { font-size: 12px; }
+  .social-hub-grid { gap: 10px; }
+  .social-hub-card { min-height: 185px; padding: 15px 13px; border-radius: 16px; }
+  .social-hub-card-top { margin-bottom: 13px; }
+  .social-hub-card-icon { width: 29px; height: 29px; border-radius: 9px; }
+  .social-hub-card-icon svg { width: 18px; height: 18px; }
+  .social-hub-card-label { font-size: 9px; }
+  .social-hub-card h2 { font-size: 17px; letter-spacing: -0.5px; }
+  .social-hub-card p { margin-bottom: 12px; font-size: 11.5px; line-height: 1.5; }
+  .social-hub-card-action { font-size: 10px; }
+  .social-hub-card-action svg { width: 13px; height: 13px; }
+  .social-hub-networks { margin-top: 22px; }
+  .social-hub-networks h2 { margin-bottom: 9px; font-size: 11px; }
+  .social-hub-network-list { gap: 7px; }
+  .social-hub-network-list a { gap: 6px; min-height: 46px; padding-inline: 5px; font-size: 11px; }
+  .social-hub-network-icon svg { width: 16px; height: 16px; }
+  .social-hub-network-arrow { display: none; }
+  .social-hub-note { margin-top: 23px; padding-top: 19px; }
+  .social-hub-note p { font-size: 16px; }
+  .social-hub-note blockquote { font-size: 11px; }
+  .social-hub-footer { justify-content: center; margin-top: 24px; font-size: 9px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .social-hub *, .social-hub *::before, .social-hub *::after { transition: none; }
+}
+
+/* Keep the four destinations visible when browser bars reduce the viewport. */
+@media (max-width: 560px) and (max-height: 560px) {
+  .social-hub-header { padding: 12px 0 14px; }
+  .social-hub-logo { width: 40px; height: 40px; }
+  .social-hub-brand strong { font-size: 18px; }
+  .social-hub-section-heading { margin-bottom: 10px; }
+  .social-hub-section-heading h1 { font-size: 19px; }
+  .social-hub-section-heading p { font-size: 11px; }
+  .social-hub-grid { gap: 8px; }
+  .social-hub-card { min-height: 165px; padding: 12px 11px; }
+  .social-hub-card-top { margin-bottom: 8px; }
+  .social-hub-card-icon { width: 26px; height: 26px; }
+  .social-hub-card h2 { margin-bottom: 6px; font-size: 15.5px; }
+  .social-hub-card p { margin-bottom: 9px; font-size: 11px; line-height: 1.4; }
+  .social-hub-card-action { font-size: 9.5px; }
+}
