@@ -30,7 +30,7 @@ const destinations = [
   {
     name: 'Après Le vote', label: 'Politique & société',
     description: 'Senarios et outils pour la presidence 2027.',
-    action: 'Contacter Clément', url: '/#contact', icon: MessagesSquare, style: 'contact',
+    action: 'Ouvrir Après le Vote', url: 'https://maisonclm.fr/socials', icon: MessagesSquare, style: 'contact',
   },
 ]
 
