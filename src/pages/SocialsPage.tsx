@@ -27,6 +27,11 @@ const destinations = [
     description: 'Une idée ? Parlons de votre projet.',
     action: 'Contacter Clément', url: '/#contact', icon: MessagesSquare, style: 'contact',
   },
+  {
+    name: 'Après Le vote', label: 'Politique & société',
+    description: 'Senarios et outils pour la presidence 2027.',
+    action: 'Contacter Clément', url: '/#contact', icon: MessagesSquare, style: 'contact',
+  },
 ]
 
 const socials = [
